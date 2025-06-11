@@ -21,4 +21,14 @@ public class ReviewService {
                 .toList();
     }
 
+    public List<Review> getReviewsByBookId(int bookId) {
+        return reviews.stream()
+                .filter(r -> r.getBookId() == bookId)
+                .toList();
+    }
+
+    public void showReviewsByBookId(int bookId) {
+        System.out.println("\nAvis pour le livre " + BookService.getBookById(bookId, books).getName() + " :");
+        getReviewsByBookId(bookId).forEach(System.out::println);
+    }
 }

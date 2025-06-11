@@ -17,7 +17,7 @@ public class BookService {
         this.reviews = reviews;
     }
 
-    public static double calculateAverageRating(Book book) {
+    public double calculateAverageRating(Book book) {
         return reviews.stream()
                 .filter(review -> review.getBookId() == book.getId())
                 .mapToDouble(Review::getRating)
@@ -25,7 +25,7 @@ public class BookService {
                 .orElse(0.0);
     }
 
-    public static List<Book> getBooksSortedByAverageRating() {
+    public List<Book> getBooksSortedByAverageRating() {
         return books.stream()
                 .sorted(Comparator.comparingDouble(book -> calculateAverageRating((Book) book)).reversed())
                 .collect(Collectors.toList());
@@ -38,11 +38,17 @@ public class BookService {
                 .orElse(null);
     }
 
-    public static Book getTheBestBooksByGenre(Genre genre) {
+    public Book getTheBestBooksByGenre(Genre genre) {
        return books.stream()
                 .filter(b -> b.getGenre() == genre)
-                .max(Comparator.comparingDouble(b -> calculateAverageRating(b)))
+                .max(Comparator.comparingDouble(this::calculateAverageRating))
                .orElse(null);
+    }
+
+    public List<Book> getBooksBeforeYear(int year) {
+        return books.stream()
+                .filter(b -> b.getYear() < year)
+                .toList();
     }
 
 

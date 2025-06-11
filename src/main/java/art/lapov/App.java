@@ -46,6 +46,12 @@ public class App {
 
         System.out.println("Rechercher les meilleurs livres par genre, avec la meilleure moyenne.");
         System.out.println("Les meilleurs livres de la fantasy : " + bookService.getTheBestBooksByGenre(Genre.SCIENCE_FICTION));
+        System.out.println("=".repeat(100));
+
+        System.out.println("Filtrer les livres publiés avant une certaine année et afficher leurs critiques.");
+        bookService.getBooksBeforeYear(1954).forEach(book -> reviewService.showReviewsByBookId(book.getId()));
+        System.out.println("=".repeat(100));
+
 
     }
 }
