@@ -4,6 +4,7 @@ import art.lapov.data.FakeDatabase;
 import art.lapov.model.Book;
 import art.lapov.model.Review;
 import art.lapov.service.BookService;
+import art.lapov.service.ReviewService;
 
 import java.util.List;
 
@@ -35,5 +36,10 @@ public class App {
         System.out.println("=".repeat(100));
 
         System.out.println("\nAfficher les critiques d’un auteur donné, triées par date décroissante.");
+        System.out.println("Alice : " + ReviewService.getReviewsByAuthor("Alice", reviews));
+        System.out.println("=".repeat(100));
+
+
+
     }
 }

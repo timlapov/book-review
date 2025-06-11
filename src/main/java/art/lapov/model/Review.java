@@ -56,4 +56,15 @@ public class Review {
     public void setDateOfComment(LocalDate dateOfComment) {
         this.dateOfComment = dateOfComment;
     }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "bookId=" + bookId +
+                ", userName='" + userName + '\'' +
+                ", rating=" + rating +
+                ", comment='" + comment + '\'' +
+                ", dateOfComment=" + dateOfComment +
+                '}';
+    }
 }
