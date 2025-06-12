@@ -6,8 +6,8 @@ import art.lapov.model.Review;
 import java.util.List;
 
 public class ReviewService {
-    private static List<Book> books;
-    private static List<Review> reviews;
+    private final List<Book> books;
+    private final List<Review> reviews;
 
     public ReviewService(List<Book> books, List<Review> reviews) {
         this.books = books;
@@ -31,4 +31,5 @@ public class ReviewService {
         System.out.println("\nAvis pour le livre " + BookService.getBookById(bookId, books).getName() + " :");
         getReviewsByBookId(bookId).forEach(System.out::println);
     }
+
 }

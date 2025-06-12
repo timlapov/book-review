@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookService {
-    private static List<Book> books;
-    private static List<Review> reviews;
+    private final List<Book> books;
+    private final List<Review> reviews;
 
     public BookService(List<Book> books, List<Review> reviews) {
         this.books = books;
@@ -51,6 +51,18 @@ public class BookService {
                 .toList();
     }
 
+    public List<Book> getBooksByGenre(Genre genre) {
+        return books.stream()
+                .filter(book -> book.getGenre().equals(genre))
+                .toList();
+    }
 
+    public double getAverageRatingByGenre(Genre genre) {
+        return books.stream()
+                .filter(book -> book.getGenre().equals(genre))
+                .mapToDouble(this::calculateAverageRating)
+                .average()
+                .orElse(0.0);
+    }
 
 }

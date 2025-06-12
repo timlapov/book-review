@@ -44,14 +44,22 @@ public class App {
         System.out.println("Alice : " + reviewService.getReviewsByAuthor("Alice"));
         System.out.println("=".repeat(100));
 
-        System.out.println("Rechercher les meilleurs livres par genre, avec la meilleure moyenne.");
+        System.out.println("\nRechercher les meilleurs livres par genre, avec la meilleure moyenne.");
         System.out.println("Les meilleurs livres de la fantasy : " + bookService.getTheBestBooksByGenre(Genre.SCIENCE_FICTION));
         System.out.println("=".repeat(100));
 
-        System.out.println("Filtrer les livres publiés avant une certaine année et afficher leurs critiques.");
+        System.out.println("\nFiltrer les livres publiés avant une certaine année et afficher leurs critiques.");
         bookService.getBooksBeforeYear(1954).forEach(book -> reviewService.showReviewsByBookId(book.getId()));
         System.out.println("=".repeat(100));
 
+        System.out.println("\nGrouper les livres par genre et afficher, pour chaque groupe, le nombre de livres et la note moyenne globale.");
+        System.out.println("\nSCIENCE_FICTION : " + bookService.getBooksByGenre(Genre.SCIENCE_FICTION).size() + " livre(s)");
+        System.out.println("La note moyenne des livres de ce genre est de : " + bookService.getAverageRatingByGenre(Genre.SCIENCE_FICTION));
+        System.out.println("\nFANTASY : " + bookService.getBooksByGenre(Genre.FANTASY).size() + " livre(s)");
+        System.out.println("La note moyenne des livres de ce genre est de : " + bookService.getAverageRatingByGenre(Genre.FANTASY));
+        System.out.println("\nPOLICIER : " + bookService.getBooksByGenre(Genre.POLICIER).size() + " livre(s)");
+        System.out.println("La note moyenne des livres de ce genre est de : " + bookService.getAverageRatingByGenre(Genre.POLICIER));
+        System.out.println("=".repeat(100));
 
     }
 }
