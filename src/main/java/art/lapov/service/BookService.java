@@ -6,6 +6,7 @@ import art.lapov.model.Review;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BookService {
@@ -26,9 +27,15 @@ public class BookService {
     }
 
     public List<Book> getBooksSortedByAverageRating() {
+        Map<Book, Double> averageRatings = books.stream()
+                .collect(Collectors.toMap(
+                        book -> book,
+                        this::calculateAverageRating
+                ));
+
         return books.stream()
-                .sorted(Comparator.comparingDouble(book -> calculateAverageRating((Book) book)).reversed())
-                .collect(Collectors.toList());
+                .sorted(Comparator.comparingDouble(averageRatings::get).reversed())
+                .toList();
     }
 
     public static Book getBookById(int id, List<Book> books) {
